@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunicationLayer;
+using CommunicationLayer.CommunicationModels;
+using CommunicationLayer.CommunicationModels.Responses;
 using DarkRift;
+using System;
+using WarlockServerDAL;
 using WarlockServerDAL.Managers;
 
 namespace UsersPlugin
 {
     public class UsersPlugin : Plugin
     {
+        #region Information
         public override string name
         {
             get { return "Users Plugin"; }
@@ -40,9 +41,43 @@ namespace UsersPlugin
         {
             get { return "asd@asd.asd"; }
         }
+        #endregion Information
 
         public UsersPlugin()
         {
+            ConnectionService.onData += OnDataReceived;
+        }
+
+        private void OnDataReceived(ConnectionService con, ref NetworkMessage data)
+        {
+            if(data.tag == (int)UsersPluginRequestTags.TryLoginRequest)
+            {
+                var requestPayload = data.data as GenericPayload<TryLoginRequestModel>;
+                if(requestPayload == null)
+                {
+                    Interface.LogError("Could not parse the payload");
+                    Interface.LogError(data.ToString());
+                    Interface.LogError(data.GetType().ToString());
+                    return;
+                }
+                using (UsersManager manager = new UsersManager())
+                {
+                    var payload = new GenericPayload<TryLoginResponseModel>();
+                    GameUser user = null;
+                    bool isSuccess = manager.TryLogin(requestPayload.Value.Username,
+                                                requestPayload.Value.Password,
+                                                out user);
+                    payload.Value = new TryLoginResponseModel
+                    {
+                        IsSuccess = isSuccess,
+                        Username = user == null ? string.Empty : user.Username,
+                    };
+
+                    con.SendReply((int)UsersPluginResponseTags.TryLoginResponse,
+                                data.subject,
+                                payload);
+                }
+            }
         }
 
         public void RegisterCommand(string[] args)
