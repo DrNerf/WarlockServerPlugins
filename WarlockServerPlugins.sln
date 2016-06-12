@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsersPlugin", "UsersPlugin\UsersPlugin.csproj", "{44CD2323-58BA-41E3-9E85-3A39D1D73053}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{45988744-0A3B-4BA0-BA53-F0F2CF6D64FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarlockServerDAL", "WarlockServerDAL\WarlockServerDAL.csproj", "{0C28A54B-08DB-432D-BD35-1527FD657E3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{A826321F-E19C-4B64-85CB-BAC81A842F4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44CD2323-58BA-41E3-9E85-3A39D1D73053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44CD2323-58BA-41E3-9E85-3A39D1D73053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44CD2323-58BA-41E3-9E85-3A39D1D73053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44CD2323-58BA-41E3-9E85-3A39D1D73053}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C28A54B-08DB-432D-BD35-1527FD657E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C28A54B-08DB-432D-BD35-1527FD657E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C28A54B-08DB-432D-BD35-1527FD657E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C28A54B-08DB-432D-BD35-1527FD657E3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A826321F-E19C-4B64-85CB-BAC81A842F4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A826321F-E19C-4B64-85CB-BAC81A842F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A826321F-E19C-4B64-85CB-BAC81A842F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A826321F-E19C-4B64-85CB-BAC81A842F4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C28A54B-08DB-432D-BD35-1527FD657E3A} = {45988744-0A3B-4BA0-BA53-F0F2CF6D64FF}
+	EndGlobalSection
+EndGlobal
