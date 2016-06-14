@@ -52,14 +52,14 @@ namespace UsersPlugin
         {
             if(data.tag == (int)UsersPluginRequestTags.TryLoginRequest)
             {
+                data.DecodeData();
                 var requestPayload = data.data as GenericPayload<TryLoginRequestModel>;
-                if(requestPayload == null)
+                if (requestPayload == null)
                 {
                     Interface.LogError("Could not parse the payload");
-                    Interface.LogError(data.ToString());
-                    Interface.LogError(data.GetType().ToString());
                     return;
                 }
+
                 using (UsersManager manager = new UsersManager())
                 {
                     var payload = new GenericPayload<TryLoginResponseModel>();
