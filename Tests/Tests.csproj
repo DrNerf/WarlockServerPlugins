@@ -52,8 +52,17 @@
   <ItemGroup>
     <Compile Include="DALs\UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomsPlugin\RoomsManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConnectionTags\CommunicationLayer.csproj">
+      <Project>{be09a9a5-6631-40e1-bd3d-1ba1593d04dd}</Project>
+      <Name>CommunicationLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoomsPlugin\RoomsPlugin.csproj">
+      <Project>{18c8895b-75e9-41be-8605-ac63bd56beb8}</Project>
+      <Name>RoomsPlugin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WarlockServerDAL\WarlockServerDAL.csproj">
       <Project>{0c28a54b-08db-432d-bd35-1527fd657e3a}</Project>
       <Name>WarlockServerDAL</Name>

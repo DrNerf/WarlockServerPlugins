@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommunicationLayer.CommunicationModels.Responses
+namespace CommunicationLayer.CommunicationModels
 {
     [Serializable]
     public class TryLoginResponseModel

@@ -1,6 +1,5 @@
 ﻿using CommunicationLayer;
 using CommunicationLayer.CommunicationModels;
-using CommunicationLayer.CommunicationModels.Responses;
 using DarkRift;
 using System;
 using WarlockServerDAL;

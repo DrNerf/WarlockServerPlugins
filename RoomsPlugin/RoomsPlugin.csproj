@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BE09A9A5-6631-40E1-BD3D-1BA1593D04DD}</ProjectGuid>
+    <ProjectGuid>{18C8895B-75E9-41BE-8605-AC63BD56BEB8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommunicationLayer</RootNamespace>
-    <AssemblyName>CommunicationLayer</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <RootNamespace>RoomsPlugin</RootNamespace>
+    <AssemblyName>RoomsPlugin</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,20 +30,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DarkRift">
+      <HintPath>..\Libs\DarkRift.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Transmission">
+      <HintPath>..\Libs\Transmission.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommunicationModels\DataObjects\PlayerInfoModel.cs" />
-    <Compile Include="CommunicationModels\Requests\TryLoginRequestModel.cs" />
-    <Compile Include="CommunicationModels\Responses\TryLoginResponseModel.cs" />
-    <Compile Include="GenericPayload.cs" />
+    <Compile Include="Classes\Models\RoomModel.cs" />
+    <Compile Include="Classes\RoomsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoomsPluginTags.cs" />
-    <Compile Include="UsersPluginTags.cs" />
+    <Compile Include="RoomsPlugin.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{277b1fc6-6d17-4925-a1a4-47bab3e1b179}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConnectionTags\CommunicationLayer.csproj">
+      <Project>{be09a9a5-6631-40e1-bd3d-1ba1593d04dd}</Project>
+      <Name>CommunicationLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
