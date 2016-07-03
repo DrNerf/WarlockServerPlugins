@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RoomsPlugin.Classes;
 using CommunicationLayer.CommunicationModels.DataObjects;
+using RoomsPlugin;
 
 namespace Tests.RoomsPlugin
 {
@@ -23,6 +25,22 @@ namespace Tests.RoomsPlugin
                 RoomsManager.EnqueuePlayer(new PlayerInfoModel { PlayerID = i });
             }
             Assert.AreEqual<int>(1, RoomsManager.Rooms.Count);
+        }
+
+        [TestMethod]
+        public void TestRoomGetters()
+        {
+            RoomsManager.Init();
+            for (int i = 0; i < 4; i++)
+            {
+                RoomsManager.EnqueuePlayer(new PlayerInfoModel 
+                {
+                    PlayerID = i
+                });
+            }
+            Assert.IsTrue(RoomsManager.GetRoomMates(0).Any());
+            RoomModel room;
+            Assert.IsTrue(RoomsManager.TryGetPlayerRoom(0, out room));
         }
     }
 }

@@ -41,7 +41,10 @@ namespace RoomsPlugin.Classes
         /// <param name="player">The player.</param>
         public static void EnqueuePlayer(PlayerInfoModel player)
         {
-            PlayersQueue.Enqueue(player);
+            lock (player)
+            {
+                PlayersQueue.Enqueue(player); 
+            }
         }
 
 
@@ -49,12 +52,15 @@ namespace RoomsPlugin.Classes
         /// Cancels the queue.
         /// </summary>
         /// <param name="player">The player.</param>
-        public static void CancelQueue(PlayerInfoModel player)
+        public static void CancelQueue(int playerID)
         {
             var item = PlayersQueue
-                .FirstOrDefault(x => x.PlayerID == player.PlayerID);
-            if (item != null)
-                PlayersQueue.Remove(item);
+                    .FirstOrDefault(x => x.PlayerID == playerID);
+            lock (item)
+            {
+                if (item != null)
+                    PlayersQueue.Remove(item); 
+            }
         }
 
 
@@ -78,12 +84,43 @@ namespace RoomsPlugin.Classes
                 room.Players = new List<PlayerInfoModel>();
                 for (int i = 0; i < RoomSize; i++)
                 {
-                    room.Players.Add(PlayersQueue.Dequeue());
+                    var player = PlayersQueue.Dequeue();
+                    player.Room = room.RoomID;
+                    room.Players.Add(player);
                 }
 
                 Rooms.Add(room.RoomID, room);
-                OnRoomCreated(null, room);
+
+                if (OnRoomCreated != null)
+                    OnRoomCreated(null, room);
             }
+        }
+
+        /// <summary>
+        /// Gets the player room.
+        /// </summary>
+        /// <returns>The room.</returns>
+        public static bool TryGetPlayerRoom(int playerID, out RoomModel room)
+        {
+            room = Rooms.Select(x => x.Value)
+                .FirstOrDefault(x => x.Players.Any(y => y.PlayerID == playerID));
+
+            return room != null;
+        }
+
+        /// <summary>
+        /// Gets the room mates.
+        /// </summary>
+        /// <param name="playerID">The player identifier.</param>
+        /// <returns>The Room mates.</returns>
+        public static IEnumerable<PlayerInfoModel> GetRoomMates(int playerID)
+        {
+            RoomModel room = null;
+            if (TryGetPlayerRoom(playerID, out room))
+            {
+                return room.Players;
+            }
+            return Enumerable.Empty<PlayerInfoModel>();
         }
     }
 }
